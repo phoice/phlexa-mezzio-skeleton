@@ -5,7 +5,7 @@ phlexa, PHP and Mezzio.
 
 ## Dependencies
 
-* PHP 7
+* PHP 8
 * [phlexa](https://github.com/phoice/phlexa)
 * [phlexa for Laminas Mezzio](https://github.com/phoice/phlexa-mezzio)
 * [Mezzio micro-framework](https://docs.mezzio.dev/)
