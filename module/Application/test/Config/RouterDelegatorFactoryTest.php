@@ -16,10 +16,9 @@ namespace ApplicationTest\Config;
 use Application\Config\RouterDelegatorFactory;
 use Application\Handler\HomePageHandler;
 use Interop\Container\ContainerInterface;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\MethodProphecy;
-use Prophecy\Prophecy\ObjectProphecy;
 use Mezzio\Application;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class RouterDelegatorFactoryTest
@@ -33,24 +32,24 @@ class RouterDelegatorFactoryTest extends TestCase
      */
     public function testFactory()
     {
-        /** @var ContainerInterface|ObjectProphecy $container */
-        $container = $this->prophesize(ContainerInterface::class);
+        /** @var ContainerInterface|MockObject $container */
+        $container = $this->createMock(ContainerInterface::class);
 
-        /** @var Application|ObjectProphecy $application */
-        $application = $this->prophesize(Application::class);
+        /** @var Application|MockObject $application */
+        $application = $this->createMock(Application::class);
 
-        /** @var MethodProphecy $getMethod */
-        $getMethod = $application->route('/', HomePageHandler::class, ['GET', 'POST'], 'home');
-        $getMethod->shouldBeCalled();
+        $application->expects($this->any())
+            ->method('route')
+            ->with('/', HomePageHandler::class, ['GET', 'POST'], 'home');
 
         $callable = function () use ($application) {
-            return $application->reveal();
+            return $application;
         };
 
         $factory = new RouterDelegatorFactory();
 
-        $applicationReturn = $factory($container->reveal(), Application::class, $callable);
+        $applicationReturn = $factory($container, Application::class, $callable);
 
-        $this->assertEquals($applicationReturn, $application->reveal());
+        $this->assertEquals($applicationReturn, $application);
     }
 }

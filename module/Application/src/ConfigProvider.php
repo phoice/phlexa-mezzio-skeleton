@@ -16,6 +16,10 @@ namespace Application;
 use Application\Handler\HomePageHandler;
 use Application\Config\PipelineDelegatorFactory;
 use Application\Config\RouterDelegatorFactory;
+use Application\Logger\Logger;
+use Application\Logger\LoggerFactory;
+use Application\Middleware\LoggingErrorListenerDelegatorFactory;
+use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
@@ -48,9 +52,13 @@ class ConfigProvider
                     RouterDelegatorFactory::class,
                     PipelineDelegatorFactory::class,
                 ],
+                ErrorHandler::class => [
+                    LoggingErrorListenerDelegatorFactory::class,
+                ],
             ],
             'factories'  => [
                 HomePageHandler::class => InvokableFactory::class,
+                Logger::class          => LoggerFactory::class,
             ],
         ];
     }

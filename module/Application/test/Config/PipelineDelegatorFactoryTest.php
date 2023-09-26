@@ -15,14 +15,7 @@ namespace ApplicationTest\Config;
 
 use Application\Config\PipelineDelegatorFactory;
 use Interop\Container\ContainerInterface;
-use PhlexaMezzio\Middleware\CheckApplicationMiddleware;
-use PhlexaMezzio\Middleware\ConfigureSkillMiddleware;
-use PhlexaMezzio\Middleware\LogAlexaRequestMiddleware;
-use PhlexaMezzio\Middleware\SetLocaleMiddleware;
-use PhlexaMezzio\Middleware\ValidateCertificateMiddleware;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\MethodProphecy;
-use Prophecy\Prophecy\ObjectProphecy;
+use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Helper\ServerUrlMiddleware;
@@ -32,7 +25,13 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use Laminas\Stratigility\Middleware\ErrorHandler;
+use PhlexaMezzio\Middleware\CheckApplicationMiddleware;
+use PhlexaMezzio\Middleware\ConfigureSkillMiddleware;
+use PhlexaMezzio\Middleware\LogAlexaRequestMiddleware;
+use PhlexaMezzio\Middleware\SetLocaleMiddleware;
+use PhlexaMezzio\Middleware\ValidateCertificateMiddleware;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class PipelineDelegatorFactoryTest
@@ -46,76 +45,36 @@ class PipelineDelegatorFactoryTest extends TestCase
      */
     public function testFactory()
     {
-        /** @var ContainerInterface|ObjectProphecy $container */
-        $container = $this->prophesize(ContainerInterface::class);
+        /** @var ContainerInterface|MockObject $container */
+        $container = $this->createMock(ContainerInterface::class);
 
-        /** @var Application|ObjectProphecy $application */
-        $application = $this->prophesize(Application::class);
+        /** @var Application|MockObject $application */
+        $application = $this->createMock(Application::class);
 
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(ErrorHandler::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(ServerUrlMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(RouteMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(ConfigureSkillMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(LogAlexaRequestMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(CheckApplicationMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(ValidateCertificateMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(SetLocaleMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(ImplicitHeadMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(ImplicitOptionsMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(MethodNotAllowedMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(UrlHelperMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(DispatchMiddleware::class);
-        $pipeMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $pipeMethod */
-        $pipeMethod = $application->pipe(NotFoundHandler::class);
-        $pipeMethod->shouldBeCalled();
+        $application->expects($this->any())->method('pipe')->with(NotFoundHandler::class);
+        $application->expects($this->any())->method('pipe')->with(ErrorHandler::class);
+        $application->expects($this->any())->method('pipe')->with(ServerUrlMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(RouteMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(ConfigureSkillMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(LogAlexaRequestMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(CheckApplicationMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(ValidateCertificateMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(SetLocaleMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(ImplicitHeadMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(ImplicitOptionsMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(MethodNotAllowedMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(UrlHelperMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(DispatchMiddleware::class);
+        $application->expects($this->any())->method('pipe')->with(NotFoundHandler::class);
 
         $callable = function () use ($application) {
-            return $application->reveal();
+            return $application;
         };
 
         $factory = new PipelineDelegatorFactory();
 
-        $applicationReturn = $factory($container->reveal(), Application::class, $callable);
+        $applicationReturn = $factory($container, Application::class, $callable);
 
-        $this->assertEquals($applicationReturn, $application->reveal());
+        $this->assertEquals($applicationReturn, $application);
     }
 }
