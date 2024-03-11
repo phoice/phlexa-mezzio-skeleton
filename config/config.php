@@ -24,6 +24,8 @@ $pattern = 'config/autoload/{{,*.}global,{,*.}'
 
 $aggregator = new ConfigAggregator(
     [
+        \Mezzio\Tooling\ConfigProvider::class,
+        \Laminas\Diactoros\ConfigProvider::class,
         Laminas\HttpHandlerRunner\ConfigProvider::class,
         Mezzio\LaminasView\ConfigProvider::class,
         Mezzio\Router\LaminasRouter\ConfigProvider::class,

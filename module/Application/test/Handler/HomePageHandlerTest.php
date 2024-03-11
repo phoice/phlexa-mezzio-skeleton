@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace ApplicationTest\Handler;
 
 use Application\Handler\HomePageHandler;
+use Laminas\Diactoros\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Laminas\Diactoros\Response;
 
 /**
  * Class HomePageHandlerTest
@@ -33,7 +33,7 @@ class HomePageHandlerTest extends TestCase
         $homePage = new HomePageHandler();
 
         /** @var ServerRequestInterface $request */
-        $request = $this->prophesize(ServerRequestInterface::class)->reveal();
+        $request = $this->createMock(ServerRequestInterface::class);
 
         /** @var Response $response */
         $response = $homePage->handle($request);

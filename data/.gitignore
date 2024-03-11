@@ -1,3 +1,6 @@
 cs.log
 last-headers-*
 last-request-*
+/log/*
+/log/*/*
+/log/*/*.log

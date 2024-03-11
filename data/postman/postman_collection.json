@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "fd8daa0b-e521-2d00-e294-17f530abf80d",
+		"_postman_id": "409a1283-c31e-45e9-8f97-c96ed3916975",
 		"name": "Phlexa Mezzio Skeleton",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8659168"
 	},
 	"item": [
 		{
@@ -16,7 +17,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -53,7 +54,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -90,7 +91,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -127,7 +128,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -164,7 +165,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -201,7 +202,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -238,7 +239,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -275,7 +276,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
@@ -312,7 +313,7 @@
 					},
 					{
 						"key": "signaturecertchainurl",
-						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-7.pem"
+						"value": "https://s3.amazonaws.com/echo.api/echo-api-cert-12.pem"
 					},
 					{
 						"key": "signature",
